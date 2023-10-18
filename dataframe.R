@@ -102,9 +102,6 @@ patients_t1$CAPABLE.migliora.la.qualità.dell.assistenza.sanitaria <-ordered(pat
 patients_t1$CAPABLE.migliora.la.comunicazione.dei.pazienti.con.il.personale.medico <-ordered(patients_t1$CAPABLE.migliora.la.comunicazione.dei.pazienti.con.il.personale.medico ,levels =lickert2)
 patients_t1$CAPABLE.mi.aiuta.a.migliorare.la.qualità.della.mia.vita <-ordered(patients_t1$CAPABLE.mi.aiuta.a.migliorare.la.qualità.della.mia.vita ,levels =lickert2)
 
-
 #patients_t1$ <-ordered(patients_t1$ ,levels =lickert2)
-
-
 
 #View(patients_t1)
