@@ -46,7 +46,7 @@ pavia<-read.xlsx(excel_file, 1 )
 pavia$Record.ID<-paste("PAVIA",pavia$Record.ID)
 excel_file <- "data/UXT1_Bari.xlsx"
 bari<-read.xlsx(excel_file, 1 )
-View(bari)
+#View(bari)
 bari$Record.ID<-paste("BARI",bari$Record.ID)
 patients_t1 <- rbind(pavia, bari)
 
@@ -55,7 +55,7 @@ patient_info<-data.frame(patients_t0$Record.ID, patients_t0$Sesso, patients_t0$e
 colnames(patient_info)<-c('Record.ID','Sesso','eta')
 #View(patient_info)
 patients_t1<-merge(patient_info,patients_t1, by.x = "Record.ID", all.x=FALSE)
-View(patients_t1)
+#View(patients_t1)
 lickert2<-c("Completamente in disaccordo", "Non d'accordo", "Neutrale","D'accordo","Completamente d'accordo")
 patients_t1$Penso.che.mi.piacerebbe.usare.questo.sistema.frequentemente<-ordered(patients_t1$Penso.che.mi.piacerebbe.usare.questo.sistema.frequentemente,levels =lickert2)
 patients_t1$Ho.trovato.il.sistema.inutilmente.complesso<-ordered(patients_t1$Ho.trovato.il.sistema.inutilmente.complesso,levels =lickert2)
@@ -72,15 +72,41 @@ patients_t1$Ho.dovuto.imparare.molte.cose.prima.di.poter.usare.questo.sistema<-o
 
 
 lickert3<-c("Molto difficile", "Difficile", "Neutrale","Facile","Molto facile")
-#patients_t1$ <-ordered(patients_t1$ ,levels =lickert3)
-#patients_t1$ <-ordered(patients_t1$ ,levels =lickert3)
-#patients_t1$ <-ordered(patients_t1$ ,levels =lickert3)
-#patients_t1$ <-ordered(patients_t1$ ,levels =lickert3)
-#patients_t1$ <-ordered(patients_t1$ ,levels =lickert3)
-#patients_t1$ <-ordered(patients_t1$ ,levels =lickert3)
-#patients_t1$ <-ordered(patients_t1$ ,levels =lickert3)
-#patients_t1$ <-ordered(patients_t1$ ,levels =lickert3)
+patients_t1$Seguire.le.schermate.introduttive <-ordered(patients_t1$Seguire.le.schermate.introduttive ,levels =lickert3)
+patients_t1$Usare.la.pagina.iniziale.dell.app <-ordered(patients_t1$Usare.la.pagina.iniziale.dell.app ,levels =lickert3)
+patients_t1$Seguire.le.istruzioni.dei.messaggi.di.posta.in.arrivo <-ordered(patients_t1$Seguire.le.istruzioni.dei.messaggi.di.posta.in.arrivo ,levels =lickert3)
+patients_t1$riportare.un.sintomo <-ordered(patients_t1$riportare.un.sintomo ,levels =lickert3)
+patients_t1$Eseguire.le.attività.proposte.nella.sezione.Obiettivo..Pillole.di.benessere. <-ordered(patients_t1$Eseguire.le.attività.proposte.nella.sezione.Obiettivo..Pillole.di.benessere. ,levels =lickert3)
+patients_t1$Consultare.i.contenuti.educazionali <-ordered(patients_t1$Consultare.i.contenuti.educazionali ,levels =lickert3)
+patients_t1$Usare.lo.smartwatch <-ordered(patients_t1$Usare.lo.smartwatch ,levels =lickert3)
+patients_t1$Sincronizzazione.dello.smartwatch <-ordered(patients_t1$Sincronizzazione.dello.smartwatch ,levels =lickert3)
+
+
+lickert4<-c("Per niente utile", "Inutile", "Neutrale","Utile","Molto utile")
+patients_t1$Le.pagine.di.introduzione.dell.app <-ordered(patients_t1$Le.pagine.di.introduzione.dell.app ,levels =lickert4)
+patients_t1$La.pagina.iniziale.della.app <-ordered(patients_t1$La.pagina.iniziale.della.app ,levels =lickert4)
+patients_t1$I.messaggi.ricevuti <-ordered(patients_t1$I.messaggi.ricevuti ,levels =lickert4)
+patients_t1$Riportare.i.sintomi <-ordered(patients_t1$Riportare.i.sintomi ,levels =lickert4)
+patients_t1$Le.attività.proposte.nella.sezione.Obiettivi <-ordered(patients_t1$Le.attività.proposte.nella.sezione.Obiettivi ,levels =lickert4)
+patients_t1$I.contenuti.educazionali <-ordered(patients_t1$I.contenuti.educazionali ,levels =lickert4)
+patients_t1$Lo.smartwatch <-ordered(patients_t1$Lo.smartwatch ,levels =lickert4)
+
+
+patients_t1$CAPABLE.mi.aiuta.ad.affrontare.il.trattamento.del.cancro <-ordered(patients_t1$CAPABLE.mi.aiuta.ad.affrontare.il.trattamento.del.cancro ,levels =lickert2)
+patients_t1$Il.concetto.CAPABLE.si.adatta.facilmente.alla.mia.vita.di.tutti.i.giorni <-ordered(patients_t1$Il.concetto.CAPABLE.si.adatta.facilmente.alla.mia.vita.di.tutti.i.giorni ,levels =lickert2)
+patients_t1$CAPABLE.aiuta.i.medici.a.controllarmi.meglio.durante.il.trattamento <-ordered(patients_t1$CAPABLE.aiuta.i.medici.a.controllarmi.meglio.durante.il.trattamento ,levels =lickert2)
+patients_t1$CAPABLE.mi.aiuta.a.gestire.gli.effetti.collaterali.del.trattamento <-ordered(patients_t1$CAPABLE.mi.aiuta.a.gestire.gli.effetti.collaterali.del.trattamento ,levels =lickert2)
+patients_t1$CAPABLE.mi.aiuta.a.migliorare.il.mio.stile.di.vita <-ordered(patients_t1$CAPABLE.mi.aiuta.a.migliorare.il.mio.stile.di.vita ,levels =lickert2)
+patients_t1$CAPABLE.mi.supporta.nell.affrontare.i.problemi.della.vita.quotidiana <-ordered(patients_t1$CAPABLE.mi.supporta.nell.affrontare.i.problemi.della.vita.quotidiana ,levels =lickert2)
+patients_t1$CAPABLE.mi.aiuta.a.controllare.le.mie.emozioni.negative..ansia..stress. <-ordered(patients_t1$CAPABLE.mi.aiuta.a.controllare.le.mie.emozioni.negative..ansia..stress. ,levels =lickert2)
+patients_t1$Vorrei.avere.l.applicazione.CAPABLE.nel.mio.cellulare.personale <-ordered(patients_t1$Vorrei.avere.l.applicazione.CAPABLE.nel.mio.cellulare.personale ,levels =lickert2)
+patients_t1$CAPABLE.migliora.la.qualità.dell.assistenza.sanitaria <-ordered(patients_t1$CAPABLE.migliora.la.qualità.dell.assistenza.sanitaria ,levels =lickert2)
+patients_t1$CAPABLE.migliora.la.comunicazione.dei.pazienti.con.il.personale.medico <-ordered(patients_t1$CAPABLE.migliora.la.comunicazione.dei.pazienti.con.il.personale.medico ,levels =lickert2)
+patients_t1$CAPABLE.mi.aiuta.a.migliorare.la.qualità.della.mia.vita <-ordered(patients_t1$CAPABLE.mi.aiuta.a.migliorare.la.qualità.della.mia.vita ,levels =lickert2)
+
+
+#patients_t1$ <-ordered(patients_t1$ ,levels =lickert2)
 
 
 
-
+#View(patients_t1)
