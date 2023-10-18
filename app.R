@@ -1,6 +1,6 @@
 library(shiny)
 library(ggplot2)
-
+source(file = "config.R", local = T)
 source(file = "dataframe.R", local = T)
 minAge <- min(patients_t0$eta[!is.na(patients_t0$eta)])
 maxAge <- max(patients_t0$eta[!is.na(patients_t0$eta)])
@@ -128,7 +128,7 @@ server <- function(input, output) {
       v10<-(data.frame(table(patients_t1$Ho.dovuto.imparare.molte.cose.prima.di.poter.usare.questo.sistema)))
       v10$q<-"Complex learning"
       sus <- rbind(v1, v2,v3,v4,v5,v6,v7,v8,v9,v10)
-      View(sus)
+     # View(sus)
       tema<-theme(
         plot.title = element_text(color="black", size=20, face="bold"),
         axis.title.x = element_text(color="black", size=14, face="bold.italic"),

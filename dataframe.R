@@ -7,8 +7,7 @@ library(plyr)
 #excel_file <- "data/CAPABLE_PAVIA_PazientiArruo-UXT0_DATA_LABELS_2023-07-21_0912.csv"
 #pavia<-read.csv(excel_file, header=TRUE, sep=";")
 ## september version
-excel_file <- "data/UXT0_Pavia.xlsx"
-pavia<-read.xlsx(excel_file, 1 )
+pavia<-read.xlsx(UXT0_Pavia, 1 )
 pavia$Record.ID<-paste("PAVIA",pavia$Record.ID)
 pavia$Data.di.nascita<-as.Date(pavia$Data.di.nascita)
 pavia$Data.di.arruolamento<-as.Date(pavia$Data.di.arruolamento)
@@ -16,8 +15,7 @@ pavia$eta<-as.numeric(round((pavia$Data.di.arruolamento-pavia$Data.di.nascita)/3
 ## first version of excel (July 2023)
 #excel_file <- "data/CAPABLE_BARI_PazientiArruo-UXT0_DATA_LABELS_2023-07-21_0913.csv"
 #bari<-read.csv(excel_file, header=TRUE, sep=";")
-excel_file <- "data/UXT0_Bari.xlsx"
-bari<-read.xlsx(excel_file, 1 )
+bari<-read.xlsx(UXT0_Bari, 1 )
 bari$Record.ID<-paste("BARI",bari$Record.ID)
 bari$Data.di.nascita<-as.Date(bari$Data.di.nascita)
 bari$Data.di.arruolamento<-as.Date(bari$Data.di.arruolamento)
@@ -41,11 +39,11 @@ patients_t0$CAPABLE.migliorerà.la.comunicazione.dei.pazienti.con.il.loro.team.d
 patients_t0$CAPABLE.mi.aiuterà.a.migliorare.la.qualità.della.mia.vita<-ordered(patients_t0$CAPABLE.mi.aiuterà.a.migliorare.la.qualità.della.mia.vita, levels = lickert)
 #View (patients_t0)
 
-excel_file <- "data/UXT1_Pavia.xlsx"
-pavia<-read.xlsx(excel_file, 1 )
+
+pavia<-read.xlsx(UXT1_Pavia, 1 )
 pavia$Record.ID<-paste("PAVIA",pavia$Record.ID)
-excel_file <- "data/UXT1_Bari.xlsx"
-bari<-read.xlsx(excel_file, 1 )
+
+bari<-read.xlsx(UXT1_Bari, 1 )
 #View(bari)
 bari$Record.ID<-paste("BARI",bari$Record.ID)
 patients_t1 <- rbind(pavia, bari)
