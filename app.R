@@ -1,4 +1,5 @@
 library(shiny)
+library(psych)
 library(ggplot2)
 source(file = "config.R", local = T)
 source(file = "dataframe.R", local = T)
@@ -107,28 +108,36 @@ server <- function(input, output) {
     output$sus_t1 <- renderPlot({
    
       patients_t1=filter(patients_t1,patients_t1$eta>=input$edad2[1] & patients_t1$eta<=input$edad2[2])
+      View(patients_t1)
       v1<-(data.frame(table(patients_t1$Penso.che.mi.piacerebbe.usare.questo.sistema.frequentemente)))
       v1$q<-"Use frequently"
       v2<-(data.frame(table(patients_t1$Ho.trovato.il.sistema.inutilmente.complesso)))
-      v2$q<-"uselessly complexity"
+      v2$q<-"NOT uselessly complexity"
       v3<-(data.frame(table(patients_t1$Pensavo.che.il.sistema.fosse.facile.da.usare)))
       v3$q<-"Easy to use"
       v4<-(data.frame(table(patients_t1$Penso.che.avrei.bisogno.del.supporto.di.una.persona.tecnica.per.poter.utilizzare.questo.sistema)))
-      v4$q<-"Technician support"
+      v4$q<-"NOT Technician support"
       v5<-(data.frame(table(patients_t1$Ho.trovato.che.le.varie.funzioni.di.questo.sistema.erano.ben.integrate)))
       v5$q<-"Functions well integrated"
       v6<-(data.frame(table(patients_t1$Ho.pensato.che.ci.fossero.troppe.incongruenze.in.questo.sistema)))
-      v6$q<-"Too many inconsistencies"
+      v6$q<-"NOT Too many inconsistencies"
       v7<-(data.frame(table(patients_t1$Immagino.che.la.maggior.parte.delle.persone.imparerebbe.a.usare.questo.sistema.molto.velocemente)))
       v7$q<-"Speedy learning"
       v8<-(data.frame(table(patients_t1$Ho.trovato.il.sistema.molto.complicato.da.usare)))
-      v8$q<-"Very complex"
+      v8$q<-"NOT Very complex"
       v9<-(data.frame(table(patients_t1$Mi.sentivo.molto.fiducioso.nell.usare.il.sistema)))
       v9$q<-"Feel capable to use"
       v10<-(data.frame(table(patients_t1$Ho.dovuto.imparare.molte.cose.prima.di.poter.usare.questo.sistema)))
-      v10$q<-"Complex learning"
+      v10$q<-"NOT Complex learning"
       sus <- rbind(v1, v2,v3,v4,v5,v6,v7,v8,v9,v10)
-     # View(sus)
+      
+      View(sus)
+    
+     
+     sus<-transform(sus, Var1=as.character(lickert2[Var1]))
+     sus$Var1<-ordered( sus$Var1,levels =lickert2)
+     statistics_sus<-describe(patients_t1$SUS)
+    title=paste ("System Usability Scale (Mean:", round(statistics_sus$mean, digits = 2),")")
       tema<-theme(
         plot.title = element_text(color="black", size=20, face="bold"),
         axis.title.x = element_text(color="black", size=14, face="bold.italic"),
@@ -137,7 +146,7 @@ server <- function(input, output) {
       
       ggplot(sus, aes(q, y = Freq, fill = Var1)) +
         geom_bar(position='stack', stat='identity')  +
-        scale_fill_manual(values=c( 'red','orange','grey','lightgreen','green','white'))  +tema + ggtitle("System Usability Scale") +
+        scale_fill_manual(values=c( 'red','orange','grey','lightgreen','green','white'))  +tema + ggtitle(title) +
         ylab("Number of patients_t1") + xlab("Dimensions")+  coord_flip() 
       
     })
@@ -238,6 +247,8 @@ server <- function(input, output) {
 
       
       perceived_impact <- rbind(v1, v2,v3,v4,v5,v6,v7,v8,v9,v10,v11)
+      
+      
       
       tema<-theme(
         plot.title = element_text(color="black", size=20, face="bold"),

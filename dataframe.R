@@ -46,6 +46,7 @@ pavia$Record.ID<-paste("PAVIA",pavia$Record.ID)
 bari<-read.xlsx(UXT1_Bari, 1 )
 #View(bari)
 bari$Record.ID<-paste("BARI",bari$Record.ID)
+names(bari)<-names(pavia)
 patients_t1 <- rbind(pavia, bari)
 
 #View(patients_t1)
@@ -66,9 +67,43 @@ patients_t1$Ho.trovato.il.sistema.molto.complicato.da.usare<-ordered(patients_t1
 patients_t1$Mi.sentivo.molto.fiducioso.nell.usare.il.sistema<-ordered(patients_t1$Mi.sentivo.molto.fiducioso.nell.usare.il.sistema,levels =lickert2)
 patients_t1$Ho.dovuto.imparare.molte.cose.prima.di.poter.usare.questo.sistema<-ordered(patients_t1$Ho.dovuto.imparare.molte.cose.prima.di.poter.usare.questo.sistema,levels =lickert2)
 
+patients_t1 <- transform(patients_t1,
+                         
+                         Penso.che.mi.piacerebbe.usare.questo.sistema.frequentemente = as.numeric(Penso.che.mi.piacerebbe.usare.questo.sistema.frequentemente) ,   
+                         Ho.trovato.il.sistema.inutilmente.complesso = as.numeric(Ho.trovato.il.sistema.inutilmente.complesso),
+                         Pensavo.che.il.sistema.fosse.facile.da.usare = as.numeric(Pensavo.che.il.sistema.fosse.facile.da.usare),
+                         Penso.che.avrei.bisogno.del.supporto.di.una.persona.tecnica.per.poter.utilizzare.questo.sistema = as.numeric(Penso.che.avrei.bisogno.del.supporto.di.una.persona.tecnica.per.poter.utilizzare.questo.sistema),
+                         Ho.trovato.che.le.varie.funzioni.di.questo.sistema.erano.ben.integrate = as.numeric(Ho.trovato.che.le.varie.funzioni.di.questo.sistema.erano.ben.integrate),
+                         Ho.pensato.che.ci.fossero.troppe.incongruenze.in.questo.sistema=as.numeric(Ho.pensato.che.ci.fossero.troppe.incongruenze.in.questo.sistema),
+                         Immagino.che.la.maggior.parte.delle.persone.imparerebbe.a.usare.questo.sistema.molto.velocemente =as.numeric(Immagino.che.la.maggior.parte.delle.persone.imparerebbe.a.usare.questo.sistema.molto.velocemente),
+                         Ho.trovato.il.sistema.molto.complicato.da.usare = as.numeric(Ho.trovato.il.sistema.molto.complicato.da.usare),
+                         Mi.sentivo.molto.fiducioso.nell.usare.il.sistema =as.numeric(Mi.sentivo.molto.fiducioso.nell.usare.il.sistema),
+                         Ho.dovuto.imparare.molte.cose.prima.di.poter.usare.questo.sistema=as.numeric(Ho.dovuto.imparare.molte.cose.prima.di.poter.usare.questo.sistema)
+)
+patients_t1$Penso.che.mi.piacerebbe.usare.questo.sistema.frequentemente<-patients_t1$Penso.che.mi.piacerebbe.usare.questo.sistema.frequentemente-1
+patients_t1$Pensavo.che.il.sistema.fosse.facile.da.usare<-patients_t1$Pensavo.che.il.sistema.fosse.facile.da.usare-1
+patients_t1$Ho.trovato.che.le.varie.funzioni.di.questo.sistema.erano.ben.integrate<-patients_t1$Ho.trovato.che.le.varie.funzioni.di.questo.sistema.erano.ben.integrate-1
+patients_t1$Immagino.che.la.maggior.parte.delle.persone.imparerebbe.a.usare.questo.sistema.molto.velocemente<-patients_t1$Immagino.che.la.maggior.parte.delle.persone.imparerebbe.a.usare.questo.sistema.molto.velocemente-1
+patients_t1$Mi.sentivo.molto.fiducioso.nell.usare.il.sistema<-patients_t1$Mi.sentivo.molto.fiducioso.nell.usare.il.sistema-1
 
+patients_t1$Ho.trovato.il.sistema.inutilmente.complesso<-5-patients_t1$Ho.trovato.il.sistema.inutilmente.complesso
+patients_t1$Penso.che.avrei.bisogno.del.supporto.di.una.persona.tecnica.per.poter.utilizzare.questo.sistema<-5-patients_t1$Penso.che.avrei.bisogno.del.supporto.di.una.persona.tecnica.per.poter.utilizzare.questo.sistema
+patients_t1$Ho.pensato.che.ci.fossero.troppe.incongruenze.in.questo.sistema<-5-patients_t1$Ho.pensato.che.ci.fossero.troppe.incongruenze.in.questo.sistema
+patients_t1$Ho.trovato.il.sistema.molto.complicato.da.usare<-5-patients_t1$Ho.trovato.il.sistema.molto.complicato.da.usare
+patients_t1$Ho.dovuto.imparare.molte.cose.prima.di.poter.usare.questo.sistema<-5-patients_t1$Ho.dovuto.imparare.molte.cose.prima.di.poter.usare.questo.sistema
 
-
+patients_t1$SUS<-(patients_t1$Penso.che.mi.piacerebbe.usare.questo.sistema.frequentemente
+                  +patients_t1$Ho.trovato.il.sistema.inutilmente.complesso
+                  +patients_t1$Pensavo.che.il.sistema.fosse.facile.da.usare
+                  +patients_t1$Penso.che.avrei.bisogno.del.supporto.di.una.persona.tecnica.per.poter.utilizzare.questo.sistema
+                
+                  +patients_t1$Ho.trovato.che.le.varie.funzioni.di.questo.sistema.erano.ben.integrate
+                  +patients_t1$Ho.pensato.che.ci.fossero.troppe.incongruenze.in.questo.sistema
+                  +patients_t1$Immagino.che.la.maggior.parte.delle.persone.imparerebbe.a.usare.questo.sistema.molto.velocemente
+                  +patients_t1$Ho.trovato.il.sistema.molto.complicato.da.usare
+                  +patients_t1$Mi.sentivo.molto.fiducioso.nell.usare.il.sistema
+                  +patients_t1$Ho.dovuto.imparare.molte.cose.prima.di.poter.usare.questo.sistema
+)*2.5
 lickert3<-c("Molto difficile", "Difficile", "Neutrale","Facile","Molto facile")
 patients_t1$Seguire.le.schermate.introduttive <-ordered(patients_t1$Seguire.le.schermate.introduttive ,levels =lickert3)
 patients_t1$Usare.la.pagina.iniziale.dell.app <-ordered(patients_t1$Usare.la.pagina.iniziale.dell.app ,levels =lickert3)
@@ -105,3 +140,12 @@ patients_t1$CAPABLE.mi.aiuta.a.migliorare.la.qualità.della.mia.vita <-ordered(p
 #patients_t1$ <-ordered(patients_t1$ ,levels =lickert2)
 
 #View(patients_t1)
+
+
+## Normalization of SUS
+
+
+
+
+
+
